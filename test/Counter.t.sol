@@ -6,10 +6,14 @@ import {Counter} from "../src/Counter.sol";
 
 contract CounterTest is Test {
     Counter public counter;
+    address public newCounterAddr;
 
     function setUp() public {
         counter = new Counter();
         counter.setNumber(0);
+
+        newCounterAddr = address(0x123);
+        vm.etch(newCounterAddr, address(counter).code);
     }
 
     function test_Increment() public {
